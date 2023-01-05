@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>2023年01月</title>
+      <link href="/posts/ydjh2301.html"/>
+      <url>/posts/ydjh2301.html</url>
+      
+        <content type="html"><![CDATA[<p>这是研究生的第一个寒假，希望能培养好的习惯并坚持下去。</p><p>以下是暂定2023年01月计划：</p><ul><li>1月15号之前理解并看完导师发的论文</li><li>学习综合素质写作</li><li>坚持背单词</li><li>开始练字</li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 月度计划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Git学习笔记</title>
+      <link href="/posts/4a17b157.html"/>
+      <url>/posts/4a17b157.html</url>
+      
+        <content type="html"><![CDATA[<p><strong>#将目录下的所有文件（包括子目录）添加到暂存区</strong></p><blockquote><p>git add .</p></blockquote><p><strong>#提交代码到本地仓库</strong></p><blockquote><p>git commit -m “commit description”</p></blockquote><p><strong>#将本地仓库master主分支代码推送到远程仓库</strong></p><blockquote><p>git push -u origin master</p></blockquote><p><strong>查询当前分支</strong></p><blockquote><p>git branch</p></blockquote><p><strong>切换分支</strong></p><blockquote><p>git checkout 分支名称</p></blockquote><p><strong>合并分支</strong></p><p><strong>切换到主分支再合并</strong></p><blockquote><p>git merge 分支名称</p></blockquote><p><strong>更改远程仓库地址</strong></p><p>创建一个新目录</p><p>cd 新目录</p><p>$ git init 初始化仓库</p><p>$ git remote -v 此时本地仓库没有关联的远程仓库</p><p>$ git remote add origin <a href="http://192.168.101.64/root/test001.git">http://192.168.101.64/root/test001.git</a> 指定远程仓库</p><p>$ git remote -v 发现本地仓库已经关联的远程仓库</p><p>origin <a href="http://192.168.101.64/root/test001.git">http://192.168.101.64/root/test001.git</a> (fetch)</p><p>origin <a href="http://192.168.101.64/root/test001.git">http://192.168.101.64/root/test001.git</a> (push)</p><p>$ git pull —rebase origin master 从远程仓库拉取代码并和本地代码合并</p><p>更改remote地址：先将原来的远程仓库链接删除git remote remove origin</p><p>再添加远程仓库：git remote add origin 。。。。</p><p>以这种方式最终向远程仓库push：git push，报如下错误</p><p>$ git push</p><blockquote><p>fatal: The current branch master has no upstream branch.<br>To push the current branch and set the remote as upstream, use<br>git push —set-upstream origin master</p></blockquote><p>需要在第一次执行命令时添加—set-upstream将本地分支与远程分支绑定：git push —set-upstream origin master</p><p>后边再执行push直接输入：git push</p><p><img src="https://cdn.jsdelivr.net/gh/zadger/imgmd@main/imgs/202211161901798.png" alt="img"></p><p><strong>error: failed to push some refsto‘远程仓库地址’</strong></p><h4 id="根本原因"><a href="#根本原因" class="headerlink" title="根本原因"></a>根本原因</h4><p>我们在创建仓库的时候，都会勾选“使用Reamdme文件初始化这个仓库”这个操作初识了一个README文件并配置添加了忽略文件。当点击创建仓库时，<br><img src="https://cdn.jsdelivr.net/gh/zadger/imgmd@main/imgs/202211161906816.png" alt="在这里插入图片描述"><br>它会帮我们做一次初始提交。于是我们的仓库就有了README.m和.gitignore文件，然后我们把本地项目关联到这个仓库，并把项目推送到仓库时，我们在关联本地与远程时，两端都是有内容的，但是这两份内容并没有联系，当我们推送到远程或者从远程拉取内容时，都会有没有被跟踪的内容，于是你看git报的详细错误中总是会让你先拉取再推送，但是拉取总是失败。</p><h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><h5 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h5><ul><li>对于error: failed to push some refsto‘远程仓库地址’<br>1 使用如下命令</li></ul><blockquote><p>git pull —rebase origin master</p></blockquote><p>2 然后再进行上传:</p><blockquote><p>git push -u origin master</p></blockquote><ul><li>推送成功<br><img src="https://cdn.jsdelivr.net/gh/zadger/imgmd@main/imgs/202211161906861.png" alt="在这里插入图片描述"></li></ul><h5 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h5><ul><li>想要避免这种问题，就要保持创建的仓库是一个空仓库，什么都没有。</li><li>就是创建仓库的时候不要勾选“使用Readme文件初始化这个仓库”<br><img src="https://cdn.jsdelivr.net/gh/zadger/imgmd@main/imgs/202211161906198.png" alt="在这里插入图片描述"></li><li>然后克隆下来方便使用，下次要推送就直接可以推送上去了。</li></ul><h5 id="fatal-unable-to-auto-detect-email-address-got-‘…-…-none-‘"><a href="#fatal-unable-to-auto-detect-email-address-got-‘…-…-none-‘" class="headerlink" title="fatal unable to auto-detect email address (got ‘…@…(none)‘)"></a>fatal unable to auto-detect email address (got ‘…@…(none)‘)</h5><p>[user]<br>  email = you@example.com<br>  name = Your Name</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Typora+PicGo自动上传图片到Github</title>
+      <link href="/posts/4a17b158.html"/>
+      <url>/posts/4a17b158.html</url>
+      
+        <content type="html"><![CDATA[<p>1、从Github新建仓库</p><p><img src="https://cdn.jsdelivr.net/gh/zadger/imgmd@main/imgs/202209181610047.png" alt="image-20220918161018992" style="zoom: 67%;" /></p><p>2、申请密钥</p><p>​    Settings -&gt; Developer settings -&gt; Personel access tokens</p><p><img src="https://cdn.jsdelivr.net/gh/zadger/imgmd@main/imgs/202209181612087.png" alt="image-20220918161216056" style="zoom: 67%;" /></p><p>​            选择销户为不销毁，并勾选repo，点击Generate token。</p><p><img src="https://cdn.jsdelivr.net/gh/zadger/imgmd@main/imgs/202209181613664.png" alt="image-20220918161347637" style="zoom:67%;" /></p><p>​            生成后一定要复制保存密钥，再次进入后将不可查看密钥。</p><p>3、配置PicGo</p><p><img src="https://cdn.jsdelivr.net/gh/zadger/imgmd@main/imgs/202209181615413.png" alt="image-20220918161546361"></p><p>​            仓库名为：  账户名/仓库名</p><p>​               分支名：  main(Github 已经取消Master分支)</p><p>​                Token：  复制的密钥</p><p>​           存储路径：  可以不设置</p><pre><code>   自定义域名：  https://cdn.jsdelivr.net/gh/账户名/仓库名@main</code></pre><p>​                              </p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/posts/4a17b156.html"/>
+      <url>/posts/4a17b156.html</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
